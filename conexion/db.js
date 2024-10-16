@@ -1,4 +1,4 @@
-const mysql = require ('mysql2') //('mysql2') en la bd
+const mysql = require ('mysql') //('mysql2') en la bd
 
 const bunyan = require ('bunyan')
 

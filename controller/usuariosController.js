@@ -6,20 +6,23 @@ comprobarUsuarios (req, res){
 
   let {usuario} = req.body
 
-  let contra = req.body.contrasena;
+  let contrasena = req.body.contrasena;
+
+ 
+
 
   // console.log(req.body)
 
-  bd.query('SELECT * FROM usuarios WHERE usuario = ? AND contrasena = ? ', [usuario,contra],(err,results)=>{
+  bd.query('SELECT * FROM usuarios WHERE usuario = ? AND contrasena = ? ', [usuario,contrasena],(err,results)=>{
 
     if(err){
       console.log(err)
     }
     if (results.length == 0){
       res.json({mensajeError : 'usuario no encontrado'}).status(401)
-    }else
+    }else{
     res.json( results[0]).status(200)
-    
+  }
   }
 )
 }

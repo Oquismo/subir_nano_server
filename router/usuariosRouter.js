@@ -4,6 +4,6 @@ const usuariosController = require ('../controller/usuariosController')
 
 const router = express.Router();
 
-router.get('/', usuariosController.comprobarUsuarios);
+router.post('/', usuariosController.comprobarUsuarios);
 
-module.exports = router;
+module.exports = router; 

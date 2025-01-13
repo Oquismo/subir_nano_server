@@ -1,13 +1,10 @@
-const express = require ('express')
+// Importando el módulo express para crear una aplicación web
+const express = require("express");
+// Importando el controlador de pilotos desde el archivo de controladores
+const pilotosController = require("../controller/pilotosController");
 
-const pilotosController = require('../controller/pilotosController');
+const router = express.Router();
 
-const router = express.Router(); // Definimos el router
+router.get("/", pilotosController.traerPilotos);
 
-router.get('/', pilotosController.traerPilotos) // Obtener todos los pilotos
-
-
-
-
-
-module.exports = router; // exportamos el router para usarlo en el archivo app.js
+module.exports = router;

@@ -1,33 +1,45 @@
-
 const bd = require("../conexion/db");
-const usuariosController ={
 
-comprobarUsuarios (req, res){
+const usuariosController = {
+  comprobarUsuarios: function (req, res) {
+    let { usuario, contrasena } = req.body;
 
-  let {usuario} = req.body
+    bd.query(
+      "SELECT * FROM usuarios WHERE usuario = ? AND contrasena = ? ",
+      [usuario, contrasena],
+      (err, results) => {
+        if (err) {
+          console.log(err);
+          res.status(500).json({ mensajeError: "Error en el servidor" });
+          return;
+        }
 
-  let contrasena = req.body.contrasena;
+        if (results.length == 0) {
+          res.status(401).json({ mensajeError: "usuario no encontrado" });
+        } else {
+          res.status(200).json(results[0]);
+        }
+      }
+    );
+  },
 
- 
+  crearUsuario: function (req, res) {
+    let { usuario, contrasena } = req.body;
 
+    bd.query(
+      "INSERT INTO usuarios (usuario, contrasena) VALUES (?, ?)",
+      [usuario, contrasena],
+      (err, results) => {
+        if (err) {
+          console.log(err);
+          res.status(500).json({ mensajeError: "Error al crear el usuario" });
+          return;
+        }
 
-  // console.log(req.body)
-
-  bd.query('SELECT * FROM usuarios WHERE usuario = ? AND contrasena = ? ', [usuario,contrasena],(err,results)=>{
-
-    if(err){
-      console.log(err)
-    }
-    if (results.length == 0){
-      res.json({mensajeError : 'usuario no encontrado'}).status(401)
-    }else{
-    res.json( results[0]).status(200)
-  }
-  }
-)
-}
-
-
-}
+        res.status(201).json({ mensaje: "Usuario creado exitosamente" });
+      }
+    );
+  },
+};
 
 module.exports = usuariosController;

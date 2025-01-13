@@ -1,13 +1,13 @@
-const express = require ('express')
+// Importando el módulo express para crear una aplicación web
+const express = require("express");
 
-const escuderiaController = require ('../controller/escuderiaController') // Importamos el controlador de escuderías
+// Importando el controlador de escuderías desde el archivo de controladores
+const escuderiaController = require("../controller/escuderiaController");
 
-const router = express.Router(); // Definimos el router
+const router = express.Router();
 
-router.get('/', escuderiaController.traerEscuderia) // Obtener todos los escuderías
+// Agregando una ruta GET para obtener todas las escuderías ordenadas por su ID
+router.get("/", escuderiaController.traerEscuderia);
 
-
-
-
-
-module.exports = router; // exportamos el router para usarlo en el archivo app.js
+// Exportando el router personalizado para su uso en otras partes de la aplicación
+module.exports = router;

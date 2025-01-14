@@ -1,7 +1,8 @@
 const conexion = require("../conexion/db");
 
 const agregarComentario = (req, res) => {
-    const { texto, autor } = req.body;
+    const { texto } = req.body;
+    const autor = req.user; // Suponiendo que el usuario autenticado está en req.user
 
     if (!texto || !autor) {
         return res.status(400).json({ error: "Texto y autor son requeridos" });

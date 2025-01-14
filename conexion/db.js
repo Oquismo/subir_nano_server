@@ -16,14 +16,17 @@ const conexion = mysql.createConnection({
   database: process.env.BASE_BD,
   port: process.env.PUERTO_DB,
 });
+
 // Conectando a la base de datos y manejando cualquier error que pueda ocurrir
 conexion.connect((err) => {
   // Si ocurre un error durante el proceso de conexión, registrelo y detenga la ejecución
   if (err) {
-    console.log(err);
+    logBD.error("Error al conectar a la base de datos:", err);
+    return;
   }
   // Si la conexión es exitosa, registre un mensaje indicando que la base de datos está conectada
-  logBD.info("conectado");
+  logBD.info("Conexión a la base de datos establecida");
 });
+
 // Exportando la conexión a la base de datos para su uso en otras partes de la aplicación
 module.exports = conexion;
